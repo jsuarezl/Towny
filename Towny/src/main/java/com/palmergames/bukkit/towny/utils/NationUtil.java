@@ -31,7 +31,7 @@ public class NationUtil {
 		screen.addComponentOf("nation",
 				TownyFormatter.colourKeyValue(translator.of("status_town_nation"), nation.getName() + TownyFormatter.formatPopulationBrackets(nation.getTowns().size())),
 				hover.asHoverEvent(),
-				ClickEvent.runCommand("/towny:nation " + nation.getName()));
+				ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:nation " + nation.getName())));
 	}
 
 	private static Component buildNationComponentHover(Town town, Translator translator, Nation nation, List<String> towns) {

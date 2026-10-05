@@ -137,12 +137,12 @@ public class ComparatorCaches {
 			if (town.isOpen()) {
 				townName = townName.append(Component.space()).append(Translatable.of("status_title_open").component());
 				Component joinComponent = Translatable.of("msg_click_join_town").component();
-				joinComponent = joinComponent.clickEvent(ClickEvent.runCommand("/towny:town join " + town));
+				joinComponent = joinComponent.clickEvent(ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:town join " + town)));
 				joinComponent = joinComponent.hoverEvent(HoverEvent.showText(Translatable.of("msg_click_join_town_hover", town).component()));
 				townName = townName.append(dashComponent).append(joinComponent);
 			}
 
-			townName = townName.clickEvent(ClickEvent.runCommand("/towny:town " + town));
+			townName = townName.clickEvent(ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:town " + town)));
 			townName = townName.hoverEvent(HoverEvent.showText(Translatable.of("msg_click_town_info").component()));
 
 			if (!spawningFullyDisabled) {
@@ -151,7 +151,7 @@ public class ComparatorCaches {
 					spawnCost = Translatable.of("msg_spawn_cost", TownyEconomyHandler.getFormattedBalance(town.getSpawnCost()));
 
 				Component spawnComponent = Translatable.of("msg_click_spawn_brief").component();
-				spawnComponent = spawnComponent.clickEvent(ClickEvent.runCommand("/towny:town spawn " + town + " -ignore"));
+				spawnComponent = spawnComponent.clickEvent(ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:town spawn " + town + " -ignore")));
 				spawnComponent = spawnComponent.hoverEvent(HoverEvent.showText(Translatable.of("msg_click_spawn", town).append("\n").append(spawnCost).component()));
 
 				townName = townName.append(dashComponent).append(spawnComponent);
@@ -230,7 +230,7 @@ public class ComparatorCaches {
 			if (nation.isOpen())
 				nationName = nationName.append(Component.space()).append(Translatable.of("status_title_open").component());
 
-			nationName = nationName.clickEvent(ClickEvent.runCommand("/towny:nation " + nation));
+			nationName = nationName.clickEvent(ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:nation " + nation)));
 			nationName = nationName.hoverEvent(HoverEvent.showText(Translatable.of("msg_click_nation_info").component()));
 
 			if (!spawningFullyDisabled) {
@@ -239,7 +239,7 @@ public class ComparatorCaches {
 					spawnCost = Translatable.of("msg_spawn_cost", TownyEconomyHandler.getFormattedBalance(nation.getSpawnCost()));
 
 				Component spawnComponent = Translatable.of("msg_click_spawn_brief").component();
-				spawnComponent = spawnComponent.clickEvent(ClickEvent.runCommand("/towny:nation spawn " + nation + " -ignore"));
+				spawnComponent = spawnComponent.clickEvent(ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:nation spawn " + nation + " -ignore")));
 				spawnComponent = spawnComponent.hoverEvent(HoverEvent.showText(Translatable.of("msg_click_spawn", nation).append("\n").append(spawnCost).component()));
 
 				nationName = nationName.append(Component.text(" - ", NamedTextColor.DARK_GRAY)).append(spawnComponent);

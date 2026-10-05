@@ -4193,5 +4193,9 @@ public class TownySettings {
 	public static boolean areEmptyTownsBecomingRuins() {
 		return getBoolean(ConfigNodes.TOWN_RUINING_EMPTY_TOWNS_BECOME_RUINS);
 	}
+
+	public static boolean runCommandWithNamespace() {
+		return getBoolean(ConfigNodes.PLUGIN_MESSAGES_RUN_COMMAND_WITH_NAMESPACE);
+	}
 }
 

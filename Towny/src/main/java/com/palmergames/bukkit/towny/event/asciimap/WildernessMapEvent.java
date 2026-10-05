@@ -1,5 +1,6 @@
 package com.palmergames.bukkit.towny.event.asciimap;
 
+import com.palmergames.bukkit.towny.TownyFormatter;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -61,7 +62,7 @@ public class WildernessMapEvent extends Event {
 	 * @return String which consists of the command.
 	 */
 	public String getClickCommand() {
-		return clickCommand;
+		return TownyFormatter.formatNamespacedCommand(clickCommand);
 	}
 
 	/**

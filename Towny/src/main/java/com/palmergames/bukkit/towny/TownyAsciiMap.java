@@ -228,11 +228,11 @@ public class TownyAsciiMap {
 						.append(forSaleComponent)
 						.append(claimedAtComponent)
 						.append(translator.component("towny_map_detailed_information").color(NamedTextColor.DARK_GREEN));
-					
-					ClickEvent clickEvent = forSaleComponent.equals(Component.empty()) 
-						? ClickEvent.runCommand("/towny:plot info " + tby + " " + tbx)
-						: ClickEvent.runCommand("/towny:plot claim " + world.getName() + " x" + tby + " z" + tbx);
-					
+
+					ClickEvent clickEvent = forSaleComponent.equals(Component.empty())
+						? ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:plot info " + tby + " " + tbx))
+						: ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:plot claim " + world.getName() + " x" + tby + " z" + tbx));
+
 					townyMap[y][x] = townyMap[y][x].hoverEvent(HoverEvent.showText(hoverComponent)).clickEvent(clickEvent);
 				} else {
 					// Unregistered town block (Wilderness)

@@ -1800,6 +1800,10 @@ public enum ConfigNodes {
 		"",
 		"# If enabled, only full releases will trigger notifications if you are running a full release.",
 		"# This is ignored if the server is currently using a pre-release version."),
+	PLUGIN_MESSAGES_RUN_COMMAND_WITH_NAMESPACE(
+			"plugin.messages.run_command_with_namespace",
+	"true",
+	"# If enabled, the click action run_command will use a namespace to prevent conflicts with other plugins."),
 	FILTERS_COLOUR_CHAT(
 			"filters_colour_chat",
 			"",

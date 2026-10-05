@@ -989,5 +989,15 @@
         "value": "towny.command.town.outpost.list.other"
       }
     ]
+  },
+  {
+    "version": "0.103.2.11",
+    "changes": [
+      {
+        "type": "APPEND",
+        "path": "plugin.messages.run_command_with_namespace",
+        "value": ""
+      }
+    ]
   }
 ]

@@ -3,6 +3,7 @@ package com.palmergames.bukkit.towny.tasks;
 import com.palmergames.bukkit.towny.Towny;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.TownyEconomyHandler;
+import com.palmergames.bukkit.towny.TownyFormatter;
 import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.TownySettings;
 import com.palmergames.bukkit.towny.TownyUniverse;
@@ -111,7 +112,7 @@ public class OnPlayerLogin implements Runnable {
 		}
 
 		if (TownyEconomyHandler.isActive() && TownyEconomyHandler.getProvider().isLegacy() && player.hasPermission(PermissionNodes.TOWNY_ADMIN_UPDATEALERTS.getNode())) {
-			ClickEvent clickEvent = ClickEvent.runCommand("/townyadmin eco convert modern");
+			ClickEvent clickEvent = ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/townyadmin eco convert modern"));
 			player.sendMessage(Translatable.of("default_towny_prefix").append(Translatable.of("msg_legacy_economy_detected")).locale(player).component().clickEvent(clickEvent));
 			player.sendMessage(Translatable.of("default_towny_prefix").append(Translatable.of("msg_click_to_convert_to_modern_economy")).locale(player).component().clickEvent(clickEvent));
 		}

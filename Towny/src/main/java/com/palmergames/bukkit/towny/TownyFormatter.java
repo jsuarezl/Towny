@@ -189,7 +189,7 @@ public class TownyFormatter {
 					.append(TownyComponents.miniMessage(colourKeyValue(translator.of("res_list"), StringMgmt.join(residents, ", "))))
 					.append(Component.newline())
 					.append(translator.component("status_hover_click_for_more"))),
-				ClickEvent.runCommand("/towny:town " + town.getName())
+				ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:town " + town.getName()))
 			);
 		}
 		
@@ -209,7 +209,7 @@ public class TownyFormatter {
 							.append(TownyComponents.miniMessage(colourKeyValue(translator.of("town_plu"), StringMgmt.join(towns, ", "))))
 							.append(Component.newline())
 							.append(translator.component("status_hover_click_for_more"))),
-					ClickEvent.runCommand("/towny:nation " + nation.getName())
+					ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:nation " + nation.getName()))
 					);
 		}
 		
@@ -217,8 +217,8 @@ public class TownyFormatter {
 				if (TownyEconomyHandler.isActive())
 					screen.addComponentOf("bank", colourKeyValue(translator.of("status_bank"), resident.getAccount().getHoldingFormattedBalance()),
 							HoverEvent.showText(translator.component("status_hover_click_for_more")),
-							ClickEvent.runCommand("/towny:resident tax " + resident.getName()));
-		
+							ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:resident tax " + resident.getName())));
+
 		// Owner of: 4 plots
 		// Perm: Build = f-- Destroy = fa- Switch = fao Item = ---
 		screen.addComponentOf("ownsXPlots", colourKey(translator.of("owner_of_x_plots", resident.getTownBlocks().size())));
@@ -362,7 +362,7 @@ public class TownyFormatter {
 					HoverEvent.showText(translator.component("registered_last_online", registeredFormat.format(town.getMayor().getRegistered()), lastOnlineFormatIncludeYear.format(town.getMayor().getLastOnline()))
 						.append(Component.newline())
 						.append(translator.component("status_hover_click_for_more"))),
-					ClickEvent.runCommand("/towny:resident " + town.getMayor().getName())
+					ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:resident " + town.getMayor().getName()))
 				);
 			} else
 				screen.addComponentOf("mayor", colourKeyValue(translator.of("rank_list_mayor"), translator.of("status_no_town")));
@@ -379,7 +379,7 @@ public class TownyFormatter {
 						HoverEvent.showText(TownyComponents.miniMessage(String.join("\n", ranklist))
 							.append(Component.newline())
 							.append(translator.component("status_hover_click_for_more"))),
-						ClickEvent.runCommand("/towny:town ranklist " + town.getName()));
+						ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:town ranklist " + town.getName())));
 
 			// [Residents] with hover showing residents names.
 			List<String> residents = getFormattedNames(town.getResidents());
@@ -390,7 +390,7 @@ public class TownyFormatter {
 				HoverEvent.showText(TownyComponents.miniMessage(getFormattedStrings(translator.of("res_list"), residents, town.getResidents().size()))
 					.append(Component.newline())
 					.append(translator.component("status_hover_click_for_more"))),
-				ClickEvent.runCommand("/towny:town reslist " + town.getName()));
+				ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:town reslist " + town.getName())));
 
 			// [Join Town] shown for open towns.
 			if (town.isOpen() && sender instanceof Player player) {
@@ -398,7 +398,7 @@ public class TownyFormatter {
 				if (res != null && !res.hasTown())
 					screen.addComponentOf("join_town", colourHoverKey(translator.of("status_join_town")),
 						HoverEvent.showText(Translatable.of("msg_click_join_town_hover", town).component()),
-						ClickEvent.runCommand("/towny:town join " + town.getName()));
+						ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:town join " + town.getName())));
 			}
 
 			// [Plots] with hover. 
@@ -409,8 +409,8 @@ public class TownyFormatter {
 				text = text.append(TownyComponents.miniMessage(colourKeyValue(translator.of("status_plot_hover", type.getFormattedName()), String.valueOf(value))).append(Component.newline()));
 			}
 			text = text.append(translator.component("status_hover_click_for_more"));
-			screen.addComponentOf("plots", colourHoverKey(translator.of("status_plot_string")), 
-				HoverEvent.showText(text), ClickEvent.runCommand("/towny:town plots " + town.getName()));
+			screen.addComponentOf("plots", colourHoverKey(translator.of("status_plot_string")),
+				HoverEvent.showText(text), ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:town plots " + town.getName())));
 
 		}
 		
@@ -480,7 +480,7 @@ public class TownyFormatter {
 					HoverEvent.showText(translator.component("registered_last_online", getFormattedResidentRegistration(king), lastOnlineFormatIncludeYear.format(king.getLastOnline()))
 						.append(Component.newline())
 						.append(translator.component("status_hover_click_for_more"))),
-					ClickEvent.runCommand("/towny:resident " + king.getName())
+					ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:resident " + king.getName()))
 					);
 
 			// Capital: Big City
@@ -497,7 +497,7 @@ public class TownyFormatter {
 					.append(TownyComponents.miniMessage(colourKeyValue(translator.of("res_list"), StringMgmt.join(residents, ", "))))
 					.append(Component.newline())
 					.append(translator.component("status_hover_click_for_more"))),
-				ClickEvent.runCommand("/towny:town " + capital.getName())
+				ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:town " + capital.getName()))
 			);
 			
 			// Nation Zone Size: 3
@@ -513,8 +513,8 @@ public class TownyFormatter {
 				HoverEvent.showText(TownyComponents.miniMessage(String.join("\n", ranklist))
 						.append(Component.newline())
 						.append(translator.component("status_hover_click_for_more"))),
-				ClickEvent.runCommand("/towny:nation ranklist " + nation.getName()));
-		
+				ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:nation ranklist " + nation.getName())));
+
 		// Towns [44]: James City, Carry Grove, Mason Town
 		List<String> towns = getFormattedNames(nation.getTowns());
 		if (towns.size() > 10)
@@ -524,8 +524,8 @@ public class TownyFormatter {
 			HoverEvent.showText(TownyComponents.miniMessage(getFormattedStrings(translator.of("status_nation_towns"), towns, nation.getTowns().size()))
 					.append(Component.newline())
 					.append(translator.component("status_hover_click_for_more"))),
-			ClickEvent.runCommand("/towny:nation townlist " + nation.getName()));
-		
+			ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:nation townlist " + nation.getName())));
+
 		// Allies [4]: James Nation, Carry Territory, Mason Country
 		List<String> allies = getFormattedNames(nation.getAllies());
 		if (allies.size() > 10)
@@ -536,7 +536,7 @@ public class TownyFormatter {
 				HoverEvent.showText(TownyComponents.miniMessage(getFormattedStrings(translator.of("status_nation_allies"), allies, nation.getAllies().size()))
 						.append(Component.newline())
 						.append(translator.component("status_hover_click_for_more"))),
-				ClickEvent.runCommand("/towny:nation allylist " + nation.getName()));
+				ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:nation allylist " + nation.getName())));
 
 		// Enemies [4]: James Nation, Carry Territory, Mason Country
 		List<String> enemies = getFormattedNames(nation.getEnemies());
@@ -548,8 +548,8 @@ public class TownyFormatter {
 				HoverEvent.showText(TownyComponents.miniMessage(getFormattedStrings(translator.of("status_nation_enemies"), enemies, nation.getEnemies().size()))
 						.append(Component.newline())
 						.append(translator.component("status_hover_click_for_more"))),
-				ClickEvent.runCommand("/towny:nation enemylist " + nation.getName()));
-		
+				ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:nation enemylist " + nation.getName())));
+
 		// [Sanctioned Towns] with hover showing Sanctioned Towns [3]: Prague, Berlin, Vienna
 		List<String> sanctionedTowns = getFormattedNames(nation.getSanctionedTowns());
 		if (sanctionedTowns.size() > 10)
@@ -560,7 +560,7 @@ public class TownyFormatter {
 				HoverEvent.showText(TownyComponents.miniMessage(getFormattedStrings(translator.of("status_nation_sanctioned_towns"), sanctionedTowns, nation.getSanctionedTowns().size()))
 					.append(Component.newline())
 					.append(translator.component("status_hover_click_for_more"))),
-				ClickEvent.runCommand("/towny:nation sanctiontown list " + nation.getName()));
+				ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:nation sanctiontown list " + nation.getName())));
 
 		// Add any metadata which opt to be visible.
 		List<Component> fields = getExtraFields(nation);
@@ -1098,7 +1098,37 @@ public class TownyFormatter {
 		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm aa");
 		return sdf.format(System.currentTimeMillis());
 	}
-	
+
+	/**
+	 * Formats a command by adding the "towny" namespace prefix if the configuration
+	 * specifies that commands should be run with a namespace. If a namespace is already
+	 * present in the command, the method will return the command unaltered unless the
+	 * configuration requires otherwise.
+	 *
+	 * @param command the command string to be formatted, which may or may not already
+	 *                include a namespace or a leading forward slash.
+	 * @return the formatted command string, either prefixed with "/towny:" or the original
+	 *         command if no modification is necessary.
+	 */
+	public static String formatNamespacedCommand(final String command) {
+		StringBuilder sb = new StringBuilder(command);
+		if (sb.charAt(0) != '/') {
+			sb.insert(0, "/");
+		}
+		if (TownySettings.runCommandWithNamespace()) {
+			// check if the command already has the namespace "towny:"
+			if (sb.indexOf("towny:") == -1) {
+				sb.insert(1, "towny:");
+			}
+			return sb.toString();
+		} else {
+			if (sb.indexOf("towny:") != -1) {
+				sb.replace(1, 7, "");
+			}
+		}
+		return sb.toString();
+	}
+
 	private static String formatWebUrl(SpawnLocation spawnLocation) {
 		String webUrl = "";
 		if (TownySettings.isUsingWebMapStatusScreens() && spawnLocation.hasSpawn() && !TownySettings.getWebMapUrl().isEmpty())

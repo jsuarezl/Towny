@@ -512,14 +512,14 @@ public class TownyMessaging {
 		TextComponent confirmComponent = Component.text(String.format(TownySettings.getConfirmationCommandFormat(), confirmline))
 			.color(acceptColour)
 			.hoverEvent(HoverEvent.showText(translator.component("msg_confirmation_spigot_click_accept", confirmline, "/" + confirmline)))
-			.clickEvent(ClickEvent.runCommand("/towny:" + confirmline));
+			.clickEvent(ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:" + confirmline)));
 
 		// Create cancel button based on given params.
 		TextComponent cancelComponent = Component.text(String.format(TownySettings.getConfirmationCommandFormat(), cancelline))
 			.color(denyColour)
 			.hoverEvent(HoverEvent.showText(translator.component("msg_confirmation_spigot_click_cancel", cancelline, "/" + cancelline)))
-			.clickEvent(ClickEvent.runCommand("/towny:" + cancelline));
-		
+			.clickEvent(ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:" + cancelline)));
+
 		player.sendMessage(Component.text(firstline).append(Component.newline())
 			.append(confirmComponent).append(Component.space()).append(cancelComponent));
 	}
@@ -547,13 +547,13 @@ public class TownyMessaging {
 		// Create confirm button based on given params.
 		Component confirmComponent = Component.text(String.format(TownySettings.getConfirmationCommandFormat(), confirmation.getConfirmCommand()), acceptColour)
 			.hoverEvent(HoverEvent.showText(translator.component("msg_confirmation_spigot_click_accept", confirmation.getConfirmCommand(), "/" + confirmation.getConfirmCommand())))
-			.clickEvent(ClickEvent.runCommand("/" + confirmation.getPluginPrefix() + ":" + confirmation.getConfirmCommand()));
+			.clickEvent(ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/" + confirmation.getPluginPrefix() + ":" + confirmation.getConfirmCommand())));
 
 		// Create cancel button based on given params.
 		Component cancelComponent = Component.text(String.format(TownySettings.getConfirmationCommandFormat(), confirmation.getCancelCommand()), denyColour)
 			.hoverEvent(HoverEvent.showText(translator.component("msg_confirmation_spigot_click_cancel", confirmation.getCancelCommand(), "/" + confirmation.getCancelCommand())))
-			.clickEvent(ClickEvent.runCommand("/" + confirmation.getPluginPrefix() + ":" + confirmation.getCancelCommand()));
-		
+			.clickEvent(ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/" + confirmation.getPluginPrefix() + ":" + confirmation.getCancelCommand())));
+
 		sender.sendMessage(
 			firstLineComponent.append(Component.newline())
 			.append(confirmComponent).append(Component.space()).append(cancelComponent).append(Component.newline())
@@ -595,11 +595,11 @@ public class TownyMessaging {
 
 	public static Component getPageNavigationFooter(String prefix, int page, String arg, int total, Translator translator) {
 		Component backButton = Component.text("<<<", NamedTextColor.GOLD)
-			.clickEvent(ClickEvent.runCommand("/" + prefix + " " + (arg.isEmpty() ? "" : arg + " ") + (page - 1)))
+			.clickEvent(ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/" + prefix + " " + (arg.isEmpty() ? "" : arg + " ") + (page - 1))))
 			.hoverEvent(HoverEvent.showText(translator.component("msg_hover_previous_page")));
 		
 		Component forwardButton = Component.text(">>>", NamedTextColor.GOLD)
-			.clickEvent(ClickEvent.runCommand("/" + prefix + " " +  (arg.isEmpty() ? "" : arg + " ") + (page + 1)))
+			.clickEvent(ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/" + prefix + " " +  (arg.isEmpty() ? "" : arg + " ") + (page + 1))))
 			.hoverEvent(HoverEvent.showText(translator.component("msg_hover_next_page")));
 		
 		Component pageText = Component.text("   ").append(translator.component("list_page", page, total)).append(Component.text("   "));
@@ -678,7 +678,7 @@ public class TownyMessaging {
 			String name = !tb.hasPlotObjectGroup() ? tb.getName() : tb.getPlotObjectGroup().getName();
 			TextComponent dash = Component.text(" - ", NamedTextColor.DARK_GRAY);		
 			TextComponent line = Component.text(Integer.toString(i + 1), NamedTextColor.GOLD)
-				.clickEvent(ClickEvent.runCommand(clickCommand + (i + 1)))
+				.clickEvent(ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand(clickCommand + (i + 1))))
 				.append(dash);
 
 			TextComponent outpostName = Component.text(name, NamedTextColor.GREEN);
@@ -736,7 +736,7 @@ public class TownyMessaging {
 			String name = !tb.hasPlotObjectGroup() ? tb.getName() : tb.getPlotObjectGroup().getName();
 			TextComponent dash = Component.text(" - ", NamedTextColor.DARK_GRAY);		
 			TextComponent line = Component.text(Integer.toString(i + 1), NamedTextColor.GOLD)
-				.clickEvent(ClickEvent.runCommand(clickCommand + town.getName() + " " + (i + 1)))
+				.clickEvent(ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand(clickCommand + town.getName() + " " + (i + 1))))
 				.append(dash);
 
 			TextComponent outpostName = Component.text(name, NamedTextColor.GREEN);
@@ -941,7 +941,7 @@ public class TownyMessaging {
 			Component line = Component.text(Integer.toString(i + 1), NamedTextColor.GOLD);
 			line = line.append(dash).append(coord).append(dash).append(town).append(dash).append(type).append(dash).append(name);
 			if (hasTPPermission) {
-				line = line.clickEvent(ClickEvent.runCommand("/towny:ta tpplot " + tb.getWorld().getName() + " " + tb.getX() + " " + tb.getZ()));
+				line = line.clickEvent(ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:ta tpplot " + tb.getWorld().getName() + " " + tb.getX() + " " + tb.getZ())));
 				line = line.hoverEvent(HoverEvent.showText(Translatable.of("msg_click_spawn", tb.getWorldCoord()).locale(sender).component() ));
 			}
 			plotsFormatted[i % 10] = line;

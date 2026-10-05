@@ -1438,7 +1438,7 @@ public class TownCommand extends BaseCommand implements CommandExecutor {
 					if (town.isOpen())
 						townName = townName.append(Component.space()).append(Translatable.of("status_title_open").locale(sender).component());
 
-					townName = townName.clickEvent(ClickEvent.runCommand("/towny:town " + town));
+					townName = townName.clickEvent(ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:town " + town)));
 					townName = townName.hoverEvent(HoverEvent.showText(Translatable.of("msg_click_town_info").locale(sender).component()));
 
 					if (!spawningFullyDisabled) {
@@ -1447,7 +1447,7 @@ public class TownCommand extends BaseCommand implements CommandExecutor {
 							spawnCost = Translatable.of("msg_spawn_cost", prettyMoney(town.getSpawnCost()));
 
 						Component spawnComponent = Translatable.of("msg_click_spawn_brief").locale(sender).component();
-						spawnComponent = spawnComponent.clickEvent(ClickEvent.runCommand("/towny:town spawn " + town + " -ignore"));
+						spawnComponent = spawnComponent.clickEvent(ClickEvent.runCommand(TownyFormatter.formatNamespacedCommand("/towny:town spawn " + town + " -ignore")));
 						spawnComponent = spawnComponent.hoverEvent(HoverEvent.showText(Translatable.of("msg_click_spawn", town).append("\n").append(spawnCost).locale(sender).component()));
 
 						townName = townName.append(Component.text(" - ", NamedTextColor.DARK_GRAY)).append(spawnComponent);
